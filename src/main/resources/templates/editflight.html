@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Logbook</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Edit Flight</h1>
+	<div>
+		<form th:object="${flight}" th:action="@{../save}" action="#"
+			method="post">
+			<input type="hidden" th:field="*{id}" class="form-control" /> <label
+				for="date">Date</label> 
+			<input type="date" id="Date"
+				th:field="*{date}" /> 
+			<br> <label for="dep">Departure airport</label>
+			<input type="text" id="dep" th:field="*{dep}" /> 
+			
+			<br> <label for="deptime">Departure time</label>
+			<input type="time" id="deptime" th:field="*{deptime}" /> 
+			
+			<br> <label	for="dest">Destination airport</label> 
+			<input type="text" th:field="*{dest}" /> 
+			
+			<br> <label for="arrtime">Arrival time</label>
+			<input type="time" id="arrtime" th:field="*{arrtime}" /> 
+			
+			<br> <label for="duration">Duration</label>
+			<input type="time" id="duration" th:field="*{duration}" /> 
+			
+			<br><label for="landings">Number of landings</label> 
+			<input type="text" th:field="*{landings}" />
+			
+			<br><label for="pic">Pilot in Command</label> 
+			<input type="text"
+				th:field="*{pic}" /> 
+				
+			<br><label for="comments">Comments</label> 
+			<input type="text"
+				th:field="*{comments}" /> 
+			
+			<br> <label for="catlist">Aircraft</label>
+			<select id="catlist" th:field="*{aircraft}" class="form-control">
+				<option th:each="aircraft: ${aircraft}"
+					th:value="${aircraft.aircraftid}" th:text="${aircraft.name}" />
+			</select> <input type="submit" class="btn btn-success" value="Save" />
+		</form>
+	</div>
+
+</body>
+</html>

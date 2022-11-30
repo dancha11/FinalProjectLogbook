@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Logbook</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Pilot Logbook</h1>
+	<img src="https://storage.googleapis.com/pod_public/1300/120619.jpg" alt="airplane" style="width:30%;height:30%;">
+	
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+	
+	<table class="table table-striped">
+		<tr>
+			<th>Date</th>
+			<th>Departure airport</th>
+			<th>Offblock</th>
+			<th>Destination airport</th>
+			<th>Onblock</th>
+			<th>Duration</th>
+			<th>Landings</th>
+			<th>Pilot in command</th>
+			<th>Comments</th>
+			<th>Aircraft</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+			
+
+
+		</tr>
+		<tr th:each="flight : ${flights}">
+			<td th:text="${flight.date}"></td>
+			<td th:text="${flight.dep}"></td>
+			<td th:text="${flight.deptime}"></td>
+			<td th:text="${flight.dest}"></td>
+			<td th:text="${flight.arrtime}"></td>
+			<td th:text="${flight.duration}"></td>
+			<td th:text="${flight.landings}"></td>
+			<td th:text="${flight.pic}"></td>
+			<td th:text="${flight.comments}"></td>
+			<td th:text="${flight.aircraft.name}"></td> 
+			<td><a th:href="@{/edit/{id}(id=${flight.id})}" class="btn btn-success">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${flight.id})}" class="btn btn-danger">Delete</a></td>
+		</tr>
+	</table>
+	<a href="/add" class="btn btn-success">Add Flight</a>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Flights</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Add Flight</h1>
+	<div>
+		<form th:object="${flight}" th:action="@{save}" action="#" method="post">
+			<label for="date">Date</label> <input type="date" id="date"
+				th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="dep">Departure airport</label> <input type="text" id="dep"
+				th:field="*{dep}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="deptime">Departure time</label> <input type="time" id="deptime"
+				th:field="*{deptime}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="dest">Destination airport</label> <input type="text" th:field="*{dest}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="arrtime">Arrival time</label> <input type="time" id="arrtime"
+				th:field="*{arrtime}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="duration">Duration</label> <input type="time" id="duration"
+				th:field="*{duration}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="landings">Number of landings</label> <input type="text" th:field="*{landings}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="pic">Pilot in Command</label> <input type="text"
+				th:field="*{pic}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="comments">Comments</label> <input type="text"
+				th:field="*{comments}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="deplist">Aircraft</label> <select id="deplist"
+				th:field="*{aircraft}" class="form-control">
+				<option th:each="aircraft: ${aircraft}"
+					th:value="${aircraft.aircraftid}" th:text="${aircraft.name}"></option>
+			</select> <input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
